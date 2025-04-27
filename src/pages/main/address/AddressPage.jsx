@@ -82,7 +82,7 @@ function AddressPage() {
   };
 
   return (
-    <div className="flex flex-col xl:flex-row justify-center items-center xl:items-start xl:mt-48 h-screen xl:h-full">
+    <div className="flex flex-col gap-3 xl:flex-row justify-center items-center xl:items-start xl:mt-20 h-screen xl:h-full">
       <div className="w-full xl:w-3/5 xl:pt-9">
         <div className="relative overflow-x-auto">
           <table className="xl:w-full text-sm text-right text-gray-500 overflow-x-scroll w-[900px]">

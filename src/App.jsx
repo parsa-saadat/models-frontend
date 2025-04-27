@@ -8,6 +8,7 @@ import AboutPage from './pages/main/AboutPage';
 import ContactPage from './pages/main/ContactPage';
 import CartPage from './pages/main/CartPage';
 import EditAddressPage from './pages/main/address/EditAddressPage';
+import AddressPage from './pages/main/address/AddressPage';
 import ProductPage from './pages/main/ProductPage';
 import ProfilePage from './pages/main/ProfilePage';
 import PrePage from './pages/main/auth/PrePage';
@@ -17,7 +18,7 @@ import OrdersPage from './pages/main/order/OrdersPage';
 import SingleOrderPage from './pages/main/order/SingleOrderPage';
 
 // Dashboard Pages
-import AddressPage from './pages/dashboard/AddressPage';
+import AdminAddressPage from './pages/dashboard/AddressPage';
 import UsersPage from './pages/dashboard/UsersPage';
 import AdminOrders from './pages/dashboard/OrdersPage';
 import ProductsPage from './pages/dashboard/ProductsPage';
@@ -87,7 +88,7 @@ const MainApp = () => {
           <Route path="orders" element={<AdminOrders />} />
           <Route path="products" element={<ProductsPage />} />
           <Route path="logs" element={<LogsPage />} />
-          <Route path="address" element={<AddressPage />} />
+          <Route path="address" element={<AdminAddressPage />} />
           <Route path="medias" element={<MediaPage />} />
         </Route>
 

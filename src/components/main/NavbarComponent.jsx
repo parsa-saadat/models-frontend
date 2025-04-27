@@ -62,7 +62,7 @@ function NavbarComponent() {
 
       <div className="flex justify-between items-center py-5 font-medium sm:flex-row-reverse">
         <Link to="/">
-          <img src={settings?.logo} alt="utopia logo" className="h-10 w-36 object-cover" />
+          <img src={settings?.logo} className="h-10 w-36 object-cover" />
         </Link>
         <ul className="hidden sm:flex gap-5 text-[16px] text-gray-700">
           <NavLink to="/contact" className="flex flex-col items-center gap-1">
@@ -97,7 +97,7 @@ function NavbarComponent() {
                 <Link to="/profile">
                   <img src={profile_icon} alt="profile" className="w-5 cursor-pointer" />
                 </Link>
-                <div className="group-hover:block hidden absolute dropdown-menu right-0 pt-4">
+                <div className="upper group-hover:block hidden absolute dropdown-menu right-0 pt-4">
                   <div className="flex flex-col gap-2 w-36 py-3 px-5 bg-[--color-white] border text-[--color-gray] rounded text-end">
                     <Link to="/profile">
                       <p className="cursor-pointer hover:text-[--color-black]">حساب کاربری</p>
@@ -181,7 +181,7 @@ function NavbarComponent() {
           </div>
         ) : null}
         <div
-          className={`absolute upper top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${
+          className={`fixed upper top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${
             visibleMenue ? 'w-full' : 'w-0'
           }`}
         >
@@ -192,28 +192,28 @@ function NavbarComponent() {
             </div>
             <NavLink
               onClick={() => setVisibleMenue(false)}
-              className="py-2 pr-6 border w-full text-right active:bg-[var(--color-[--color-black])] active:text-[var(--color-white)]"
+              className="py-2 pr-6 border w-full text-right active:bg-[--color-black] active:text-[var(--color-white)]"
               to="/"
             >
               خانه
             </NavLink>
             <NavLink
               onClick={() => setVisibleMenue(false)}
-              className="py-2 pr-6 border w-full text-right active:bg-[var(--color-[--color-black])] active:text-[var(--color-white)]"
+              className="py-2 pr-6 border w-full text-right active:bg-[--color-black] active:text-[var(--color-white)]"
               to="/shop"
             >
               فروشگاه
             </NavLink>
             <NavLink
               onClick={() => setVisibleMenue(false)}
-              className="py-2 pr-6 border w-full text-right active:bg-[var(--color-[--color-black])] active:text-[var(--color-white)]"
+              className="py-2 pr-6 border w-full text-right active:bg-[--color-black] active:text-[var(--color-white)]"
               to="/about"
             >
               درباره ما
             </NavLink>
             <NavLink
               onClick={() => setVisibleMenue(false)}
-              className="py-2 pr-6 border w-full text-right active:bg-[var(--color-[--color-black])] active:text-[var(--color-white)]"
+              className="py-2 pr-6 border w-full text-right active:bg-[--color-black] active:text-[var(--color-white)]"
               to="/contact"
             >
               تماس با ما

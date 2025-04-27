@@ -35,7 +35,7 @@ function SingleOrderPage() {
         const updatedProducts = await Promise.all(
           order.items.map(async (item) => {
             const productRes = await axios.get(
-              `${import.meta.env.VITE_API_URL}/product/${item._id}`,
+              `${import.meta.env.VITE_API_URL}/product/${item?._id}`,
             );
             const product = productRes.data.body;
 
@@ -248,7 +248,7 @@ function SingleOrderPage() {
           {order?.items?.map((item, index) => {
             const product = products[index];
             return (
-              <Link to={`/product/${product._id}`} key={item._id}>
+              <Link to={`/product/${product?._id}`} key={item?._id}>
                 <div
                   key={item._id}
                   className="flex flex-row-reverse items-center justify-center bg-[--color-light-gray] p-3 gap-x-3  rounded"

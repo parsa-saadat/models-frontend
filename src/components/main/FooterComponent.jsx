@@ -14,26 +14,36 @@ function FooterComponent() {
         <div className="flex flex-col items-end">
           <p className="text-lg mb-3">ارتباط با ما</p>
           <ul className="flex flex-col gap-2 text-gray-600 items-end">
-            <li className="flex gap-2">
-              <span>{settings?.contact_phone}</span>
-              <FontAwesomeIcon icon="phone-flip" className="text-base text-[--color-main]" />
-            </li>
-            <li className="flex gap-2">
-              <span>{settings?.contact_email}</span>
-              <FontAwesomeIcon icon="envelope" className="text-base text-[--color-main]" />
-            </li>
-            <li className="flex gap-2">
-              <span>{settings?.telegram_chanel}</span>
-              <FontAwesomeIcon icon={faTelegram} className="text-base text-[--color-main]" />
-            </li>
-            <li className="flex gap-2">
-              <span>{settings?.instagram_page}</span>
-              <FontAwesomeIcon icon={faInstagram} className="text-base text-[--color-main]" />
-            </li>
-            <li className="flex gap-2">
-              <span>{settings?.telegram_support}</span>
-              <FontAwesomeIcon icon="user" className="text-base text-[--color-main]" />
-            </li>
+            {settings?.contact_phone && (
+              <li className="flex gap-2 text-[--color-gray] hover:text-[--color-main]">
+                <span>{settings?.contact_phone}</span>
+                <FontAwesomeIcon icon="phone-flip" className="text-base" />
+              </li>
+            )}
+            {settings?.contact_email && (
+              <li className="flex gap-2 text-[--color-gray] hover:text-[--color-main]">
+                <span>{settings?.contact_email}</span>
+                <FontAwesomeIcon icon="envelope" className="text-base" />
+              </li>
+            )}
+            {settings?.telegram_chanel && (
+              <li className="flex gap-2 text-[--color-gray] hover:text-[--color-main]">
+                <span>{settings?.telegram_chanel}</span>
+                <FontAwesomeIcon icon={faTelegram} className="text-base" />
+              </li>
+            )}
+            {settings?.instagram_page && (
+              <li className="flex gap-2 text-[--color-gray] hover:text-[--color-main]">
+                <span>{settings?.instagram_page}</span>
+                <FontAwesomeIcon icon={faInstagram} className="text-base " />
+              </li>
+            )}
+            {settings?.telegram_support && (
+              <li className="flex gap-2 text-[--color-gray] hover:text-[--color-main]">
+                <span>{settings?.telegram_support}</span>
+                <FontAwesomeIcon icon="user" className="text-base" />
+              </li>
+            )}
           </ul>
         </div>
 
