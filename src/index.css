@@ -1,0 +1,100 @@
+@font-face {
+  font-family: 'IranYekan';
+  src: url('./public/fonts/iranyekan/iranyekanwebthinfanum.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'IranYekan';
+  src: url('./public/fonts/iranyekan/iranyekanweblightfanum.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'IranYekan';
+  src: url('./public/fonts/iranyekan/iranyekanwebregularfanum.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'IranYekan';
+  src: url('./public/fonts/iranyekan/iranyekanwebmediumfanum.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'IranYekan';
+  src: url('./public/fonts/iranyekan/iranyekanwebboldfanum.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'IranYekan';
+  src: url('./public/fonts/iranyekan/iranyekanwebextraboldfanum.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'IranYekan';
+  src: url('/public/fonts/iranyekan/iranyekanwebblackfanum.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Primary Colors */
+  --color-main: #3a57e8; /* Main Blue */
+  --color-main-dark: #2f46b4; /* Deeper Blue */
+  --color-main-light: #e4e9fb; /* Soft Blue Tint */
+
+  /* Neutral Colors */
+  --color-white: #ffffff;
+  --color-light-gray: #f4f4f6; /* Soft Light Background */
+  --color-gray: #6e6e73; /* Medium Neutral */
+  --color-dark-gray: #2c2c2e; /* For headings or dark UI */
+  --color-black: #121212;
+
+  /* Status Colors (Adjusted to better contrast with blue) */
+  --color-success: #2ba84a; /* Balanced Green */
+  --color-soft-success: #d9f4e4; /* Pale Green BG */
+
+  --color-warning: #ff9f43; /* Warm Amber */
+  --color-soft-warning: #fff2e0; /* Light Amber */
+
+  --color-danger: #e53935; /* Vivid Red */
+  --color-soft-danger: #ffe3e1; /* Soft Red Tint */
+
+  /* Typography */
+  --toastify-font-family: 'IranYekan', sans-serif !important;
+}
+
+* {
+  font-family: 'IranYekan';
+  transition: all 0.3s ease-in-out;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+a.active hr {
+  display: block;
+}
+
+a.active > li {
+  background: red;
+}
+
+.upper {
+  z-index: 100;
+}
