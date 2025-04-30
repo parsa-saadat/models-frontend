@@ -114,7 +114,7 @@ function OrdersPage() {
   };
 
   return (
-    <div className=" flex flex-col justify-center mt-10 lg:mt-20 lg:ml-40 lg:mr-40">
+    <div className=" flex flex-col justify-center mt-10 lg:mt-24 lg:ml-40 lg:mr-40">
       <div className="text-center text-2xl mb-10">
         <Title partone="سفارش" parttwo="ها" />
       </div>

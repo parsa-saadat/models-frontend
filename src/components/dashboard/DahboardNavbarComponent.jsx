@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { menu_icon } from '../../public/assets/icons/icons';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useSettings } from '../../contexts/SettingsContext';
 
 function DashboardNavbarComponent() {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { settings } = useSettings();
 
   return (
     <>
-      <div className="md:hidden p-4 bg-white border-b flex justify-between items-center">
-        <span className="font-bold text-gray-800 text-lg">داشبورد</span>
+      <div className="sm:hidden p-4 bg-white border-b flex justify-between items-center">
+        <span className=" font-bold text-gray-800 text-sm">داشبورد</span>
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="text-[--color-gray] p-2 rounded transition"
@@ -17,11 +19,13 @@ function DashboardNavbarComponent() {
           <img src={menu_icon} className="rotate-180 w-5" />
         </button>
       </div>
+
       <div
-        className={`bg-white md:w-64 w-full md:min-h-screen p-4 space-y-4 border-e transition-all duration-300 ease-in-out ${
+        className={`bg-white sm:w-64 w-full sm:min-h-screen p-4 space-y-4 border-e transition-all duration-300 ease-in-out ${
           isMenuOpen ? 'block' : 'hidden'
-        } md:block`}
+        } sm:block`}
       >
+        <img src={settings?.logo} onClick={() => navigate('/')} className='hidden sm:block h-10 w-2/3 object-cover cursor-pointer' alt="" />
         <ul className="flex flex-col space-y-2 text-sm font-medium text-gray-600">
           {[
             { path: '/', label: 'خانه', end: true },

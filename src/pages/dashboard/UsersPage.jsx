@@ -114,7 +114,7 @@ function UsersPage() {
 
       {/* جدول کاربران */}
       <div className="overflow-auto rounded border">
-        <table className="min-w-full text-sm text-center rtl text-gray-800">
+        <table className="w-full text-sm text-center rtl text-gray-800">
           <thead className="bg-[--color-light-gray] text-xs">
             <tr>
               <th className="p-3">شناسه</th>

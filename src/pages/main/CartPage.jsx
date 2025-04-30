@@ -206,7 +206,7 @@ function CartPage() {
                     <p className="text-xs text-[--color-black]">سایز: {product.size}</p>
                     {product.discount?.percentage ? (
                       <span className="text-[var(--color-[--color-black])] flex gap-x-1 items-center">
-                        <img src={toman_icon} className="w-4 h-4" alt="تومان" />
+                        <img src={toman_icon} className="w-4 h-4 rounded" alt="تومان" />
                         {(
                           (product.price *
                             currentCart.quantity *
@@ -220,7 +220,7 @@ function CartPage() {
                       </span>
                     ) : (
                       <span className="flex gap-x-1 items-center text-[--color-black]">
-                        <img src={toman_icon} className="w-4 h-4" alt="تومان" />
+                        <img src={toman_icon} className="w-4 h-4 rounded" alt="تومان" />
                         {((product.price * currentCart.quantity) / 10).toLocaleString()}
                       </span>
                     )}

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { about_img, no_image_img } from '../../public/assets/images/images';
+import { no_image_img } from '../../public/assets/images/images';
 
 function Product({ product }) {
   const [image, setImage] = useState();
 
   useEffect(() => {
-    if (product.images.length > 0)
+    if (product.images?.length > 0)
       axios
         .get(`${import.meta.env.VITE_API_URL}/storage/${product.images[0]}`)
         .then((res) => {
@@ -21,11 +21,8 @@ function Product({ product }) {
   return (
     <Link to={`/product/${product._id}`}>
       <div className={`flex flex-col items-end rounded`} key={product._id}>
-        <div className="overflow-hidden">
-          <img
-            className="rounded hover:scale-110 transition ease-in-out object-cover w-screen h-[260px] "
-            src={image}
-          />
+      <div className="relative aspect-square w-full overflow-hidden">
+          <img className="absolute top-0 left-0 w-full h-full object-cover rounded" src={image} />
         </div>
         <p className="font-bold text-xs bg-[var(--color-white)] w-min p-1 rounded text-[var(--color-dark-gray)] absolute m-2">
           {product.size}

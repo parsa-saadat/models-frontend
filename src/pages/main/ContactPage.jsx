@@ -10,7 +10,11 @@ function ContactPage() {
   return (
     <div dir="rtl" className="px-4">
       <div className="my-10 flex flex-col justify-center md:flex-row gap-16 mb-28 items-center">
-        <img className="w-full md:max-w-[500px] rounded shadow-md" src={contact_img} alt="تماس با ما" />
+        <img
+          className="w-full md:max-w-[500px] rounded shadow-md"
+          src={contact_img}
+          alt="تماس با ما"
+        />
         <div className="flex flex-col justify-center items-start gap-8 text-end w-full md:max-w-[500px]">
           <div>
             <p className="font-bold text-2xl text-gray-700 mb-2 text-start">ارتباط با ما</p>
@@ -51,10 +55,6 @@ function ContactPage() {
               </div>
             )}
           </div>
-
-          <p className="text-gray-400 text-sm mt-6 text-start">
-            همچنین می‌توانید از طریق فرم تماس سایت، پیام خود را برای ما ارسال کنید. تیم پشتیبانی در سریع‌ترین زمان پاسخگو خواهد بود.
-          </p>
         </div>
       </div>
     </div>

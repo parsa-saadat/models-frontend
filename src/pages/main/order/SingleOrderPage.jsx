@@ -253,17 +253,17 @@ function SingleOrderPage() {
                   key={item._id}
                   className="flex flex-row-reverse items-center justify-center bg-[--color-light-gray] p-3 gap-x-3  rounded"
                 >
-                  <div className="w-20 h-20  ">
+                  <div className="relative aspect-square w-28 overflow-hidden">
                     {product?.loadedImage ? (
                       <img
                         src={product.loadedImage}
                         alt={product.name}
-                        className="w-full h-full rounded self-center object-cover"
+                        className="absolute top-0 left-0 w-full h-full object-cover"
                       />
                     ) : (
                       <img
                         src={no_image_img}
-                        className="w-full h-full rounded self-center object-cover"
+                        className="absolute top-0 left-0 w-full h-full object-cover"
                       />
                     )}
                   </div>
