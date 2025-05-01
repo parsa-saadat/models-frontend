@@ -54,7 +54,7 @@ function AddressPage() {
       <div className="bg-white border rounded p-5 space-y-4">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <h3 className="text-lg font-semibold text-gray-800">فیلتر</h3>
-          <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+          <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
             {/* Select */}
             <div>
               <div className="relative border border-gray-300 rounded px-2 py-2 flex items-center justify-center outline-none">

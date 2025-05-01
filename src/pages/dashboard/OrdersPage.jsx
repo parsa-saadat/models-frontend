@@ -127,7 +127,7 @@ function AdminOrders() {
         <h3 className="text-lg font-semibold text-gray-800">فیلتر</h3>
         <div className="flex flex-col space-y-4 md:flex-row md:gap-3 md:space-y-0">
           {/* فیلتر نقش */}
-          <div className="relative w-full sm:w-56">
+          <div className="relative w-full md:w-56">
             <select
               onChange={(e) => setStatus(e.target.value)}
               className="appearance-none w-full border border-gray-300 rounded px-4 py-2 pr-10 text-sm text-gray-700 bg-white focus:ring-2 focus:ring-[--color-main] focus:outline-none"

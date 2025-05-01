@@ -34,7 +34,7 @@ function ShopPage() {
           import.meta.env.VITE_API_URL
         }/product?page=${page}&limit=${limit}&stock_status=${stockStatus}&size=${size}&min_production=${minProd}&max_production=${maxProd}${
           queryParams.get('search') ? '&name=' + queryParams.get('search') : ''
-        }`,
+        }&desc=true`,
       )
       .then((res) => {
         setTotalPages(res.data.body.totalPages);
@@ -80,7 +80,7 @@ function ShopPage() {
                 <p className="text-gray-500 mt-2">محصولی پیدا نشد</p>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-4 gap-y-6 ">
+              <div dir='rtl' className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-4 gap-y-6 ">
                 {products.map((product) => (
                   <Product key={product._id} product={product} />
                 ))}

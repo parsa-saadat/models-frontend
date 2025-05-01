@@ -5,15 +5,15 @@ import { useSettings } from '../../contexts/SettingsContext';
 
 function DashboardNavbarComponent() {
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [imdenuOpen, setImdenuOpen] = useState(false);
   const { settings } = useSettings();
 
   return (
     <>
-      <div className="sm:hidden p-4 bg-white border-b flex justify-between items-center">
-        <span className=" font-bold text-gray-800 text-sm">داشبورد</span>
+      <div className="md:hidden p-4 bg-white border-b flex justify-between items-center">
+        <span className=" font-bold text-gray-800 text-md">داشبورد</span>
         <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          onClick={() => setImdenuOpen(!imdenuOpen)}
           className="text-[--color-gray] p-2 rounded transition"
         >
           <img src={menu_icon} className="rotate-180 w-5" />
@@ -21,12 +21,12 @@ function DashboardNavbarComponent() {
       </div>
 
       <div
-        className={`bg-white sm:w-64 w-full sm:min-h-screen p-4 space-y-4 border-e transition-all duration-300 ease-in-out ${
-          isMenuOpen ? 'block' : 'hidden'
-        } sm:block`}
+        className={`bg-white md:w-64 w-full md:min-h-screen p-4 space-y-4 border-e transition-all duration-300 ease-in-out ${
+          imdenuOpen ? 'block' : 'hidden'
+        } md:block`}
       >
-        <img src={settings?.logo} onClick={() => navigate('/')} className='hidden sm:block h-10 w-2/3 object-cover cursor-pointer' alt="" />
-        <ul className="flex flex-col space-y-2 text-sm font-medium text-gray-600">
+        <img src={settings?.logo} onClick={() => navigate('/')} className='hidden md:block h-10 w-2/3 object-cover cursor-pointer' alt="" />
+        <ul className="flex flex-col space-y-2 text-md font-medium text-gray-600">
           {[
             { path: '/', label: 'خانه', end: true },
             { path: '/dashboard', label: 'پیشخوان', end: true },
@@ -47,7 +47,7 @@ function DashboardNavbarComponent() {
                     isActive ? 'bg-[--color-main] text-white ' : 'hover:bg-[--color-light-gray]'
                   }`
                 }
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => setImdenuOpen(false)}
               >
                 {item.label}
               </NavLink>
@@ -61,7 +61,7 @@ function DashboardNavbarComponent() {
               }
               onClick={() => {
                 localStorage.removeItem('admin_token');
-                setIsMenuOpen(false);
+                setImdenuOpen(false);
               }}
             >
               خروج از حساب

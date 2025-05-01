@@ -53,15 +53,31 @@ function MediaPage() {
     }
   };
 
+  const handleDeleteImage = (imageId) => {
+    axios
+      .delete(`${import.meta.env.VITE_API_URL}/storage/${imageId}`, {
+        headers: {
+          Authorization: admin_token,
+        },
+      })
+      .then(() => {
+        setMedias(medias.filter((media) => media._id !== imageId));
+        toast.success('تصویر با موفقیت حذف شد');
+      })
+      .catch((e) => {
+        toast.error(e?.response?.data?.message || 'خطا در حذف تصویر');
+      });
+  };
+
   return (
     <div className="flex flex-col gap-6">
       {/* Filter & Upload */}
       <div className="bg-white border rounded p-5 space-y-4">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <h3 className="text-lg font-semibold text-gray-800">فیلتر</h3>
-          <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+          <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
             {/* Select */}
-            <div className="relative w-full sm:w-56">
+            <div className="relative w-full md:w-56">
               <select
                 onChange={(e) => setContentType(e.target.value)}
                 className="appearance-none w-full border border-gray-300 rounded px-4 py-2 pr-10 text-sm text-gray-700 bg-white focus:ring-2 focus:ring-[--color-main] focus:outline-none"
@@ -152,14 +168,24 @@ function MediaPage() {
                     className="absolute top-0 left-0 w-full h-full object-cover"
                   />
                 )}
-                <div
-                  onClick={() => {
-                    navigator.clipboard.writeText(media._id);
-                    toast.success('آی‌دی کپی شد!');
-                  }}
-                  className="absolute inset-0 bg-[black]/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white cursor-pointer transition-opacity"
-                >
-                  <FontAwesomeIcon icon="fa-solid fa-copy" className="text-3xl text-white" />
+                <div className="absolute inset-0 bg-[black]/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white cursor-pointer transition-opacity">
+                  <div className="absolute top-2 right-2 z-10">
+                    <FontAwesomeIcon
+                      onClick={() => {
+                        handleDeleteImage(media._id);
+                      }}
+                      icon="trash"
+                      className="text-base hover:text-[--color-danger] cursor-pointer"
+                    />
+                  </div>
+                  <FontAwesomeIcon
+                    onClick={() => {
+                      navigator.clipboard.writeText(media._id);
+                      toast.success('آی‌دی کپی شد!');
+                    }}
+                    icon="fa-solid fa-copy"
+                    className="text-3xl hover:text-[--color-main] p-12"
+                  />
                 </div>
               </div>
               <div className="p-3 text-sm text-gray-700 space-y-1">

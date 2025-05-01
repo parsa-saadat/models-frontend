@@ -62,7 +62,7 @@
   --color-light-gray: #f4f4f6; /* Soft Light Background */
   --color-gray: #6e6e73; /* Medium Neutral */
   --color-dark-gray: #2c2c2e; /* For headings or dark UI */
-  --color-black: #121212;
+  --color-black: #000000;
 
   /* Status Colors (Adjusted to better contrast with blue) */
   --color-success: #2ba84a; /* Balanced Green */

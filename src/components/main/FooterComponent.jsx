@@ -70,19 +70,27 @@ function FooterComponent() {
         <div className="flex flex-col items-end">
           <img src={settings?.logo} alt="Logo" className="mb-5 mr-[-14px] h-10 w-36 object-cover" />
           <p className="w-full md:w-2/3 text-[var(--color-gray)] text-end">
-            ما با استفاده از تکنولوژی های پیشرفته و با بهره گیری از متخصصان مجرب سعی داریم بهترین
-            محصولات را برای شما عزیزان ارائه دهیم. ما با استفاده از تکنولوژی های پیشرفته و با بهره
-            گیری از متخصصان مجرب.
+            فروشگاه {settings?.site_name || ""} با هدف ارائه‌ی مدل‌های کلکسیونی باکیفیت در مقیاس‌های مختلف مثل 1/64،
+            1/18 و... فعالیت می‌کند. ما عاشق جزئیات، اصالت و دنیای کلکسیون هستیم و تلاش می‌کنیم
+            تجربه‌ای خاص برای علاقه‌مندان فراهم کنیم.
           </p>
         </div>
       </div>
 
       {/* خط جداساز و کپی رایت */}
-      <div>
-        <hr />
-        <p className="py-5 text-sm text-center">
+      <hr />
+      <div className="py-5 text-sm text-center">
+        <p>
           تمامی حقوق این وب‌سایت متعلق به {settings?.site_name} است. © {new Date().getFullYear()}
         </p>
+        {/* deleloper */}
+        <div className="flex justify-center items-center gap-1 pt-2 text-xs text-[--color-gray]">
+          <span>developed by</span>
+          <a href="https://github.com/parsa-saadat" target="_blank" rel="noreferrer">
+            <span className="text-[--color-main] font-bold">{'< parsa ss />'}</span>
+            <a />
+          </a>
+        </div>
       </div>
     </div>
   );

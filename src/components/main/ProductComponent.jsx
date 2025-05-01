@@ -16,12 +16,12 @@ function Product({ product }) {
         .catch((err) => setImage(no_image_img));
 
     image ?? setImage(no_image_img);
-  });
+  }, []);
 
   return (
     <Link to={`/product/${product._id}`}>
-      <div className={`flex flex-col items-end rounded`} key={product._id}>
-      <div className="relative aspect-square w-full overflow-hidden">
+      <div dir='ltrcom' className={`flex flex-col items-end rounded`} key={product._id}>
+        <div className="relative aspect-square w-full overflow-hidden">
           <img className="absolute top-0 left-0 w-full h-full object-cover rounded" src={image} />
         </div>
         <p className="font-bold text-xs bg-[var(--color-white)] w-min p-1 rounded text-[var(--color-dark-gray)] absolute m-2">
@@ -35,8 +35,9 @@ function Product({ product }) {
           </div>
           <div className="flex flex-col items-end w-2/3">
             <p className="pt-3 pb-1 text-sm">{product.name}</p>
-
-            {product.stock_status === 'IN STOCK' ? (
+            {product.stock_status === 'COMING SOON' ? (
+              <span className="text-[var(--color-warning)] pl-1 text-xs font-bold">... بزودی </span>
+            ) : product.stock_status === 'IN STOCK' ? (
               <>
                 {product.discount.percentage ? (
                   <p className="text-sm font-medium text-[var(--color-[--color-black])] flex items-center">

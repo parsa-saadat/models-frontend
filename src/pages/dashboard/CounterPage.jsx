@@ -144,7 +144,7 @@ function CounterPage() {
 
         {/* Open Orders */}
         <div className="bg-white p-4 rounded space-y-4">
-          <h4 className="text-[--color-main]] font-bold text-base border-b pb-2">سفارش های باز</h4>
+          <h4 className="text-[--color-main] font-bold text-base border-b pb-2">سفارش های باز</h4>
           <div className="flex flex-col gap-3 max-h-[260px] overflow-y-auto pr-1">
             {openOrders.map((order, index) => (
               <div
@@ -155,7 +155,6 @@ function CounterPage() {
                   <FontAwesomeIcon icon="fa-solid fa-box" className="text-[--color-main] text-sm" />
                   <span className="text-sm text-gray-800">{order._id}</span>
                 </div>
-                <button className="text-[--color-main] text-xs hover:underline">مشاهده</button>
               </div>
             ))}
           </div>

@@ -9,25 +9,27 @@ import persian_fa from 'react-date-object/locales/persian_fa';
 import { toast } from 'react-toastify';
 import { toman_icon } from '../../public/assets/icons/icons';
 import Product from '../../components/main/ProductComponent';
+import { header_img, no_image_img } from '../../public/assets/images/images';
+import { accordion } from '@material-tailwind/react';
 
 function EditProductPage() {
   const admin_token = localStorage.getItem('admin_token');
   const navigate = useNavigate();
   const { productId } = useParams();
   const [product, setProduct] = useState({});
-  const [loading, setLoading] = useState(true);
   const [reload, setReload] = useState(0);
   const [newProduct, setNewProduct] = useState({});
   const [showDiscount, setShowDiscount] = useState(false);
   const [removeDiscount, setRemoveDiscount] = useState(false);
-  const [newImagesData, setNewImagesData] = useState([]);
-  const [productImages, setProductImages] = useState([]);
+  const [images, setImages] = useState([]);
+  const [imagesIds, setImagesIds] = useState([]);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/product/${productId}`);
         setProduct(res.data.body);
+        setImagesIds(res.data.body.images);
       } catch (e) {
         toast.error(e?.response?.data?.message || 'خطا در دریافت محصول');
       }
@@ -35,6 +37,29 @@ function EditProductPage() {
 
     fetchProduct();
   }, [productId, reload]);
+
+  useEffect(() => {
+    setImages([]);
+    const fetchProductImages = async () => {
+      if (!imagesIds?.length) return;
+
+      try {
+        for (let i = 0; i < imagesIds.length; i++) {
+          const res = await axios.get(`${import.meta.env.VITE_API_URL}/storage/${imagesIds[i]}`);
+          const image = {
+            id: imagesIds[i],
+            data: res.data.body.data,
+            contentType: res.data.body.contentType,
+          };
+          setImages((prev) => [...prev, image]);
+        }
+      } catch (e) {
+        toast.error(e?.response?.data?.message || 'خطا در دریافت تصاویر محصول');
+      }
+    };
+
+    fetchProductImages();
+  }, [imagesIds]);
 
   const handleSubmit = async () => {
     if (showDiscount) {
@@ -51,7 +76,7 @@ function EditProductPage() {
     try {
       const response = await axios.put(
         `${import.meta.env.VITE_API_URL}/product/${productId}`,
-        { ...newProduct },
+        { ...newProduct, images: imagesIds },
         { headers: { Authorization: admin_token } },
       );
       setNewProduct({});
@@ -63,23 +88,74 @@ function EditProductPage() {
   };
 
   const handleDelete = async () => {
+    const confirmed = confirm('آیا مطمئن هستید که می‌خواهید این محصول را حذف کنید؟');
+    if (!confirmed) return;
+
     try {
-      const response = await fetch('/api/products/delete', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: newProduct.id }),
+      const res = await axios.delete(`${import.meta.env.VITE_API_URL}/product/${productId}`, {
+        headers: { Authorization: admin_token },
       });
-      if (!response.ok) throw new Error('خطا در حذف');
-      toast.success('محصول با موفقیت حذف شد');
+
+      if (res.status === 200 || res.status === 204) {
+        toast.success('محصول با موفقیت حذف شد');
+        navigate(-1);
+      } else {
+        toast.error('حذف با موفقیت انجام نشد');
+      }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error?.response?.data?.message || 'خطا در حذف محصول');
     }
   };
 
+  const handleDeleteImage = (imageId) => {
+    setImagesIds((prev) => prev.filter((id) => id !== imageId));
+  };
+
+  const renderImage = (data) => {
+    if (!data) return no_image_img;
+    return `data:${data?.contentType};base64,${data?.data}`;
+  };
+
+  const handleUploadImage = async (event) => {
+    const file = event.target.files[0];
+
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('files', file);
+
+    try {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/storage`, formData, {
+        headers: {
+          Authorization: admin_token,
+        },
+      });
+
+      toast.success('تصویر با موفقیت آپلود شد');
+      return res.data.body[0]._id;
+    } catch (e) {
+      toast.error(e?.response?.data?.message || 'خطا در آپلود تصویر');
+    }
+  };
+
+  const handleAddImage = (imageId) => {
+    const filtered = imagesIds.filter((id) => id !== imageId);
+    setImagesIds([...filtered, imageId]);
+  };
+
+  const handleChangeMainImage = (imageId) => {
+    const filtered = imagesIds.filter((id) => id !== imageId);
+    if (filtered.length === 0) setImagesIds([imageId]);
+    filtered.shift();
+    setImagesIds([imageId, ...filtered]);
+  };
+
+  console.log({ images, imagesIds });
   return (
     <div dir="rtl" className="flex flex-col justify-between items-center">
-      <div className="flex justify-between md:justify-start md:gap-3 items-center w-full py-3">
-        <h2 className=" text-xl font-bold text-gray-900">بروزرسانی محصول</h2>
+      {/* navigator */}
+      <div className="flex justify-between lg:justify-start lg:gap-3 items-center w-full pb-10 pt-3">
+        <h2 className=" text-xl font-bold text-[--color-black]">بروزرسانی محصول</h2>
         <span
           onClick={() => navigate(-1)}
           className="flex items-center gap-1 text-md text-[--color-gray] cursor-pointer"
@@ -91,18 +167,19 @@ function EditProductPage() {
           />
         </span>
       </div>
-      <div className="flex flex-col md:flex-row gap-12 px-4 w-full">
-        <div className="flex justify-between items-center w-full md:w-1/2">
+      <div className="flex flex-col lg:flex-row gap-12 px-4 w-full">
+        {/* update form */}
+        <div className="flex justify-between items-center w-full lg:w-1/2">
           <div className="w-full">
             <section className="bg-white">
-              <div className=" pt-5 mx-auto">
+              <div className=" mx-auto">
                 <div>
                   <div className="grid gap-4 mb-4 md:grid-cols-2 md:gap-6 md:mb-5">
                     {/* col 1 */}
                     <div>
                       <label
                         htmlFor="name"
-                        className="block mb-2 text-md font-medium text-gray-900"
+                        className="block mb-2 text-md font-medium text-[--color-black]"
                       >
                         نام محصول
                       </label>
@@ -111,7 +188,7 @@ function EditProductPage() {
                         name="name"
                         id="name"
                         onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-[--color-main] focus:border-[--color-main] block w-full p-2.5"
+                        className="bg-[--color-light-gray] border border-[--color-gray] text-[--color-black] text-md rounded focus:ring-[--color-main] focus:border-[--color-main] block w-full p-2.5"
                         value={newProduct.name}
                         placeholder={product.name}
                       />
@@ -119,7 +196,7 @@ function EditProductPage() {
                     <div className="w-full">
                       <label
                         htmlFor="brand"
-                        className="block mb-2 text-md font-medium text-gray-900"
+                        className="block mb-2 text-md font-medium text-[--color-black]"
                       >
                         برند محصول
                       </label>
@@ -128,16 +205,16 @@ function EditProductPage() {
                         name="brand"
                         id="brand"
                         onChange={(e) => setNewProduct({ ...newProduct, brand: e.target.value })}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-[--color-main] focus:border-[--color-main] block w-full p-2.5"
+                        className="bg-[--color-light-gray] border border-[--color-gray] text-[--color-black] text-md rounded focus:ring-[--color-main] focus:border-[--color-main] block w-full p-2.5"
                         value={newProduct.brand}
                         placeholder={product.brand}
                       />
                     </div>
                     {/* col 2 */}
-                    <div>
+                    <div className='relative'>
                       <label
                         htmlFor="category"
-                        className="block mb-2 text-md font-medium text-gray-900"
+                        className="block mb-2 text-md font-medium text-[--color-black]"
                       >
                         دسته‌بندی محصول
                       </label>
@@ -145,18 +222,24 @@ function EditProductPage() {
                         id="category"
                         onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
                         value={newProduct.category || product.category}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-[--color-main] focus:border-[--color-main] block w-full p-2.5"
+                        className="appearance-none bg-[--color-light-gray] border border-[--color-gray] text-[--color-black] text-md rounded block w-full p-2.5 pr-10"
                       >
                         <option value="MODEL">مدل</option>
                         <option value="ACCESSORY">لوازم جانبی</option>
                         <option value="MYSTERY">شانسی</option>
                         <option value="OTHER">سایر محصولات</option>
                       </select>
+                      <div className="pointer-events-none absolute top-12 right-3 transform -translate-y-1/2 text-[--color-gray] text-xs">
+                        <FontAwesomeIcon
+                          icon="fa-solid fa-chevron-down"
+                          className="w-3 h-3 text-[--color-black] mt-[1px]"
+                        />
+                      </div>
                     </div>
-                    <div>
+                    <div className="relative">
                       <label
                         htmlFor="category"
-                        className="block mb-2 text-md font-medium text-gray-900"
+                        className="block mb-2 text-md font-medium text-[--color-black]"
                       >
                         دسته‌بندی محصول
                       </label>
@@ -164,7 +247,7 @@ function EditProductPage() {
                         id="category"
                         onChange={(e) => setNewProduct({ ...newProduct, size: e.target.value })}
                         value={newProduct.size || product.size}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-[--color-main] focus:border-[--color-main] block w-full p-2.5"
+                        className="appearance-none bg-[--color-light-gray] border border-[--color-gray] text-[--color-black] text-md rounded block w-full p-2.5 pr-10"
                       >
                         <option value="1/64">1/64</option>
                         <option value="1/24">1/24</option>
@@ -173,12 +256,18 @@ function EditProductPage() {
                         <option value="1/32">1/32</option>
                         <option value="1/43">1/43</option>
                       </select>
+                      <div className="pointer-events-none absolute top-12 right-3 transform -translate-y-1/2 text-[--color-gray] text-xs">
+                        <FontAwesomeIcon
+                          icon="fa-solid fa-chevron-down"
+                          className="w-3 h-3 text-[--color-black] mt-[1px]"
+                        />
+                      </div>
                     </div>
                     {/* col 3 */}
-                    <div>
+                    <div className="relative">
                       <label
                         htmlFor="category"
-                        className="block mb-2 text-md font-medium text-gray-900"
+                        className="block mb-2 text-md font-medium text-[--color-black]"
                       >
                         موجودی
                       </label>
@@ -188,17 +277,23 @@ function EditProductPage() {
                           setNewProduct({ ...newProduct, stock_status: e.target.value })
                         }
                         value={newProduct.stock_status || product.stock_status}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-[--color-main] focus:border-[--color-main] block w-full p-2.5"
+                        className="appearance-none bg-[--color-light-gray] border border-[--color-gray] text-[--color-black] text-md rounded block w-full p-2.5 pr-10"
                       >
                         <option value="IN STOCK">موجود</option>
                         <option value="OUT OF STOCK">ناموجود</option>
                         <option value="COMING SOON">به زودی</option>
                       </select>
+                      <div className="pointer-events-none absolute top-12 right-3 transform -translate-y-1/2 text-[--color-gray] text-xs">
+                        <FontAwesomeIcon
+                          icon="fa-solid fa-chevron-down"
+                          className="w-3 h-3 text-[--color-black] mt-[1px]"
+                        />
+                      </div>
                     </div>
                     <div>
                       <label
                         htmlFor="category"
-                        className="block mb-2 text-md font-medium text-gray-900"
+                        className="block mb-2 text-md font-medium text-[--color-black]"
                       >
                         تعداد
                       </label>
@@ -208,14 +303,14 @@ function EditProductPage() {
                         placeholder={product.quantity}
                         onChange={(e) => setNewProduct({ ...newProduct, quantity: e.target.value })}
                         value={newProduct.quantity}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-[--color-main] focus:border-[--color-main] block w-full p-2.5"
+                        className="bg-[--color-light-gray] border border-[--color-gray] text-[--color-black] text-md rounded focus:ring-[--color-main] focus:border-[--color-main] block w-full p-2.5"
                       />
                     </div>
                     {/* col 4 */}
                     <div>
                       <label
                         htmlFor="production"
-                        className="block mb-2 text-md font-medium text-gray-900"
+                        className="block mb-2 text-md font-medium text-[--color-black]"
                       >
                         سال تولید
                       </label>
@@ -229,14 +324,14 @@ function EditProductPage() {
                         onChange={(e) =>
                           setNewProduct({ ...newProduct, production: e.target.value })
                         }
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-[--color-main] focus:border-[--color-main] block w-full p-2.5"
+                        className="bg-[--color-light-gray] border border-[--color-gray] text-[--color-black] text-md rounded focus:ring-[--color-main] focus:border-[--color-main] block w-full p-2.5"
                         value={newProduct.production}
                       />
                     </div>
                     <div className="relative">
                       <label
                         htmlFor="production"
-                        className="block mb-2 text-md font-medium text-gray-900"
+                        className="block mb-2 text-md font-medium text-[--color-black]"
                       >
                         رنگ
                       </label>
@@ -245,7 +340,7 @@ function EditProductPage() {
                         {/* Circle Color Preview */}
                         <div
                           onClick={() => document.getElementById('hiddenColorInput').click()}
-                          className="w-10 h-10 rounded border border-gray-300 cursor-pointer transition-all duration-200  px-4 ml-2"
+                          className="w-10 h-10 rounded border border-[--color-gray] cursor-pointer transition-all duration-200  px-4 ml-2"
                           style={{
                             backgroundColor: newProduct.color || product.color || '#191919',
                           }}
@@ -263,7 +358,7 @@ function EditProductPage() {
                         {/* Text Input for Hex Code */}
                         <input
                           type="text"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-[--color-main] focus:border-[--color-main] block p-2.5 w-full"
+                          className="bg-[--color-light-gray] border border-[--color-gray] text-[--color-black] text-md rounded focus:ring-[--color-main] focus:border-[--color-main] block p-2.5 w-full"
                           value={newProduct.color || product.color || '#191919'}
                           onChange={(e) => setNewProduct({ ...newProduct, color: e.target.value })}
                           placeholder="#191919"
@@ -275,7 +370,7 @@ function EditProductPage() {
                     <div className="md:col-span-2 relative">
                       <label
                         htmlFor="price"
-                        className="block mb-2 text-md font-medium text-gray-900"
+                        className="block mb-2 text-md font-medium text-[--color-black]"
                       >
                         قیمت
                       </label>
@@ -301,7 +396,7 @@ function EditProductPage() {
                           })
                         }
                         value={newProduct?.price ? newProduct.price.toLocaleString() : ''}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-[--color-main] focus:border-[--color-main] block w-full p-2.5 pr-9 text-left"
+                        className="bg-[--color-light-gray] border border-[--color-gray] text-[--color-black] text-md rounded focus:ring-[--color-main] focus:border-[--color-main] block w-full p-2.5 pr-9 text-left"
                       />
                     </div>
 
@@ -309,20 +404,20 @@ function EditProductPage() {
                     <div className="md:col-span-2">
                       <label
                         htmlFor="description"
-                        className="block mb-2 text-md font-medium text-gray-900"
+                        className="block mb-2 text-md font-medium text-[--color-black]"
                       >
                         توضیحات
                       </label>
                       <textarea
                         id="description"
                         rows="8"
-                        className="block p-2.5 w-full text-md text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-[--color-main] focus:border-[--color-main]"
+                        className="block p-2.5 w-full text-md text-[--color-black] bg-[--color-light-gray] rounded border border-[--color-gray] focus:ring-[--color-main] focus:border-[--color-main]"
                         placeholder={product.description}
                       />
                     </div>
                   </div>
                   {/* discount */}
-                  <div className="flex flex-col gap-4 mb-6">
+                  <div className="flex flex-col gap-4">
                     <div className="flex flex-row justify-between items-center text-base mb-2">
                       <span>تخفیف</span>
                       <span
@@ -354,7 +449,7 @@ function EditProductPage() {
                           <div>
                             <label
                               htmlFor="discount_percentage"
-                              className="block mb-2 text-md font-medium text-gray-900"
+                              className="block mb-2 text-md font-medium text-[--color-black]"
                             >
                               درصد تخفیف
                             </label>
@@ -376,7 +471,7 @@ function EditProductPage() {
                                   },
                                 });
                               }}
-                              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-[--color-main] focus:border-[--color-main] block w-full p-2.5"
+                              className="bg-[--color-light-gray] border border-[--color-gray] text-[--color-black] text-md rounded focus:ring-[--color-main] focus:border-[--color-main] block w-full p-2.5"
                               value={newProduct?.discount?.percentage || 1}
                             />
                           </div>
@@ -384,7 +479,7 @@ function EditProductPage() {
                           <div>
                             <label
                               htmlFor="expirationDate"
-                              className="block mb-2 text-md font-medium text-gray-900"
+                              className="block mb-2 text-md font-medium text-[--color-black]"
                             >
                               تاریخ انقضای تخفیف
                             </label>
@@ -405,7 +500,7 @@ function EditProductPage() {
                                   },
                                 });
                               }}
-                              inputClass="w-full bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-[--color-main] focus:border-[--color-main] p-2.5 text-right"
+                              inputClass="w-full bg-[--color-light-gray] border border-[--color-gray] text-[--color-black] text-md rounded focus:ring-[--color-main] focus:border-[--color-main] p-2.5 text-right"
                               containerClassName="w-full"
                               placeholder="انتخاب تاریخ شمسی"
                             />
@@ -418,43 +513,139 @@ function EditProductPage() {
                           name="remove_discount"
                           id="remove_discount"
                           onChange={(e) => setRemoveDiscount(!removeDiscount)}
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-[--color-main] focus:border-[--color-main] p-2.5"
+                          className="bg-[--color-light-gray] border border-[--color-gray] text-[--color-black] text-md rounded focus:ring-[--color-main] focus:border-[--color-main] p-2.5"
                           value={removeDiscount}
                         />
-                        <label htmlFor="production" className=" text-md font-medium text-gray-900">
+                        <label
+                          htmlFor="production"
+                          className=" text-md font-medium text-[--color-black]"
+                        >
                           حذف تخفیف
                         </label>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="flex items-center gap-4">
-                    <button
-                      onClick={() => handleSubmit()}
-                      className="bg-[--color-main] text-white px-4 py-2 rounded   hover:bg-[--color-black] hover:text-white"
-                    >
-                      بروزرسانی محصول
-                    </button>
-                    <button
-                      onClick={() => handleDelete()}
-                      className="bg-[--color-black] text-white px-4 py-2 rounded  hover:bg-[--color-danger] hover:text-white"
-                    >
-                      حذف محصول
-                    </button>
                   </div>
                 </div>
               </div>
             </section>
           </div>
         </div>
-        <div className="flex flex-col justify-between items-end gap-4 sm:w-1/2">
-          <div></div>
-          <div className="w-full sm:w-1/2 flex flex-col justify-center items-center">
-            <div className="w-full">
-              <Product product={product} />
+        {/* images */}
+        <div className="flex flex-col space-y-11 w-full  gap-4 md:w-1/2">
+          <div className="flex flex-col">
+            <div>
+              <h3 className="text-sm font-medium mb-2">تصویر یکتا</h3>
+            </div>
+            <div className="relative w-72 aspect-square overflow-hidden rounded">
+              <img
+                src={renderImage(images[0])}
+                alt="Header Preview"
+                className="w-full h-full object-cover"
+              />
+              <div
+                className={`absolute ${imagesIds.length == 0 ? 'h-0' : 'h-1/2'} inset-0 text-[white]  bg-[--color-danger] opacity-0 hover:opacity-70 flex items-center justify-center  cursor-pointer transition-all`}
+              >
+                <label
+                  onClick={() => handleDeleteImage(imagesIds[0])}
+                  className="bg-[black]/40 text-white font-semibold text-base rounded-t w-full h-full flex flex-col text-center items-center justify-center cursor-pointer border-2 border-[--color-gray] border-dashed mx-auto"
+                >
+                  حذف
+                  <p className="text-xs  text-[--color-light-gray] mt-2">حذف تصویر یکتا</p>
+                </label>
+              </div>
+              <div
+                className={`absolute ${imagesIds.length == 0 ? 'h-full' : 'h-1/2'} w-full bottom-0 text-[white] bg-[--color-main] opacity-0 hover:opacity-70 flex items-center justify-center cursor-pointer transition-all`}
+              >
+                <label
+                  htmlFor="upload_main_img"
+                  className="bg-[black]/40 text-white font-semibold text-base rounded-b w-full h-full flex flex-col text-center items-center justify-center cursor-pointer border-2 border-[--color-gray] border-dashed mx-auto"
+                >
+                  ویرایش
+                  <input
+                    type="file"
+                    id="upload_main_img"
+                    className="hidden"
+                    onChange={async (e) => {
+                      const imageId = await handleUploadImage(e);
+                      if (imageId) handleChangeMainImage(imageId);
+                    }}
+                    accept="image/*"
+                  />
+                  <p className="text-xs text-[--color-light-gray] mt-2">PNG, JPG, SVG, WEBP</p>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="w-full">
+            <div>
+              <h3 className="text-sm font-medium mb-2">تصاویر محصول</h3>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-6 w-full">
+              {images.map((image, index) => {
+                if (index === 0) return '';
+                return (
+                  <div
+                    key={index}
+                    className="relative w-full aspect-square overflow-hidden rounded"
+                  >
+                    <img
+                      src={renderImage(image)}
+                      alt="Header Preview"
+                      className="w-full h-full object-cover"
+                    />
+                    <div
+                      onClick={() => {}}
+                      className="absolute inset-0 text-[white] bg-[--color-danger] opacity-0 hover:opacity-70 flex items-center justify-center  cursor-pointer transition-opacity"
+                    >
+                      <label
+                        onClick={() => handleDeleteImage(image.id)}
+                        className="bg-[black]/40 text-white font-semibold text-base rounded w-full h-full flex flex-col text-center items-center justify-center cursor-pointer border-2 border-[--color-gray] border-dashed mx-auto"
+                      >
+                        <FontAwesomeIcon icon="trash" className="text-lg" />
+                      </label>
+                    </div>
+                  </div>
+                );
+              })}
+
+              <div className="relative w-full aspect-square overflow-hidden rounded">
+                <label
+                  htmlFor="upload_images"
+                  className="bg-white text-[--color-gray] font-semibold text-base rounded w-full h-full flex flex-col text-center items-center justify-center cursor-pointer border-2 border-[--color-gray] border-dashed mx-auto"
+                >
+                  بارگزاری
+                  <input
+                    type="file"
+                    id="upload_images"
+                    className="hidden"
+                    onChange={async (e) => {
+                      const imageId = await handleUploadImage(e);
+                      if (imageId) handleAddImage(imageId);
+                    }}
+                    accept="image/*"
+                  />
+                  <p className="text-xs font-medium text-[--color-gray] mt-2">PNG, JPG SVG, WEBP</p>
+                </label>
+              </div>
+              {/* می‌تونی این قسمت رو برای عکس‌های بیشتر تکرار کنی */}
             </div>
           </div>
         </div>
+      </div>
+      {/* update and delete button */}
+      <div className="flex items-start w-full gap-4 mt-8">
+        <button
+          onClick={() => handleSubmit()}
+          className="bg-[--color-main] text-white px-4 py-2 rounded   hover:bg-[--color-black] hover:text-white"
+        >
+          بروزرسانی محصول
+        </button>
+        <button
+          onClick={() => handleDelete()}
+          className="bg-[--color-black] text-white px-4 py-2 rounded  hover:bg-[--color-danger] hover:text-white"
+        >
+          حذف محصول
+        </button>
       </div>
     </div>
   );

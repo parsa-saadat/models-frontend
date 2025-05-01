@@ -44,14 +44,14 @@ function ProductsPage() {
       }
     };
     fetchProducts();
-  }, [page, reload, desc, search]);
+  }, [page, reload, desc]);
 
   return (
     <div className="flex flex-col gap-6">
       <div className="bg-white border rounded p-5 space-y-4">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <h3 className="text-lg font-semibold text-gray-800">فیلتر</h3>
-          <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+          <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
             {/* Select */}
             <div>
               <div className="relative border border-gray-300 rounded px-2 py-2 flex items-center justify-center outline-none">
@@ -60,6 +60,11 @@ function ProductsPage() {
                   value={search}
                   onChange={(e) => {
                     setSearch(e.target.value);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      setReload(reload + 1);
+                    }
                   }}
                   className="text-right pr-9 px-2 w-full h-full outline-none"
                 />

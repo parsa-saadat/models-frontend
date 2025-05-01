@@ -9,7 +9,7 @@ const DashboardLayout = () => {
   }
 
   return (
-    <div dir="rtl" className="admin-wrapper min-h-screen flex flex-col sm:flex-row">
+    <div dir="rtl" className="admin-wrapper min-h-screen flex flex-col md:flex-row">
       <DashboardNavbarComponent />
       <div className="flex-1 pt-6 md:p-6 text-sm">
         <div className="bg-white rounded p-6 border">
