@@ -20,7 +20,7 @@ function Product({ product }) {
 
   return (
     <Link to={`/product/${product._id}`}>
-      <div dir='ltrcom' className={`flex flex-col items-end rounded`} key={product._id}>
+      <div dir='ltr' className={`flex flex-col items-end rounded`} key={product._id}>
         <div className="relative aspect-square w-full overflow-hidden">
           <img className="absolute top-0 left-0 w-full h-full object-cover rounded" src={image} />
         </div>

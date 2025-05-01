@@ -26,7 +26,7 @@ function OfferProductsComponent() {
           <p className="text-gray-500 mt-2">محصولی پیدا نشد</p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-4 gap-y-6">
+        <div dir='rtl' className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-4 gap-y-6">
           {products.map((product) => (
             <Product product={product} />
           ))}

@@ -411,7 +411,7 @@ function EditProductPage() {
                       <textarea
                         id="description"
                         rows="8"
-                        className="block p-2.5 w-full text-md text-[--color-black] bg-[--color-light-gray] rounded border border-[--color-gray] focus:ring-[--color-main] focus:border-[--color-main]"
+                        className="block p-2.5 w-full h-32 text-md text-[--color-black] bg-[--color-light-gray] rounded border border-[--color-gray] focus:ring-[--color-main] focus:border-[--color-main]"
                         placeholder={product.description}
                       />
                     </div>
