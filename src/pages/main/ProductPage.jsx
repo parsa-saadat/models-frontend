@@ -216,7 +216,7 @@ function ProductPage() {
 
           <div className="flex flex-col gap-2 mt-5 text-end text-[--color-gray]">
             <p>پشتیبانی ۲۴ ساعته</p>
-            <p>سیاست بازگشت کالا</p>
+            <p>تضمنین کیفیت</p>
             <p>پرداخت امن</p>
           </div>
 
