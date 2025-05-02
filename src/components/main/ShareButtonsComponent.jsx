@@ -31,7 +31,7 @@ const ShareButtons = () => {
       <FontAwesomeIcon
         icon={faCopy}
         onClick={() => navigator.clipboard.writeText(window.location.href)}
-        className="text-white p-[10px] bg-[--color-black] hover:bg-[var(--color-main)] rounded text-[30px] cursor-pointer"
+        className="text-white py-[10px] px-[12px] bg-[--color-black] hover:bg-[var(--color-main)] rounded text-[30px] cursor-pointer"
       />
     </div>
   );

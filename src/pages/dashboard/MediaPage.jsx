@@ -120,14 +120,18 @@ function MediaPage() {
                 formData.append('files', file);
 
                 try {
-                  await axios.post(`${import.meta.env.VITE_API_URL}/storage`, formData, {
-                    headers: {
-                      Authorization: admin_token,
-                      'Content-Type': 'multipart/form-data',
+                  const res = await axios.post(
+                    `${import.meta.env.VITE_API_URL}/storage`,
+                    formData,
+                    {
+                      headers: {
+                        Authorization: admin_token,
+                        'Content-Type': 'multipart/form-data',
+                      },
                     },
-                  });
+                  );
                   toast.success('فایل با موفقیت آپلود شد');
-                  setReload((prev) => prev + 1);
+                  setMedias([res.data.body[0], ...medias]);
                   setPage(1);
                 } catch (e) {
                   toast.error('خطا در آپلود فایل');
