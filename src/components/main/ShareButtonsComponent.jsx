@@ -24,14 +24,14 @@ const ShareButtons = () => {
         <a key={idx} href={href} target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon
             icon={icon}
-            className="text-white p-[10px] bg-[var(--color-[--color-black])] hover:bg-[var(--color-main)] rounded text-[30px]"
+            className="text-white p-[10px] bg-[--color-black] hover:bg-[var(--color-main)] rounded text-[30px]"
           />
         </a>
       ))}
       <FontAwesomeIcon
         icon={faCopy}
         onClick={() => navigator.clipboard.writeText(window.location.href)}
-        className="text-white p-[10px] bg-[var(--color-[--color-black])] hover:bg-[var(--color-main)] rounded text-[30px] cursor-pointer"
+        className="text-white p-[10px] bg-[--color-black] hover:bg-[var(--color-main)] rounded text-[30px] cursor-pointer"
       />
     </div>
   );

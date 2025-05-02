@@ -44,7 +44,7 @@ function SettingPage() {
     <div className="max-w-5xl mx-auto p-6 space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* نام سایت */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 col-span-2">
           <label className="text-gray-700 font-semibold">نام سایت</label>
           <input
             name="site_name"
@@ -75,18 +75,6 @@ function SettingPage() {
             value={settings.favicon_image_id || ''}
             onChange={handleChange}
             placeholder={originalSettings.favicon_image_id || 'مقدار وارد کنید'}
-            className="border border-gray-300 rounded-lg p-3"
-          />
-        </div>
-
-        {/* آیدی بنر */}
-        <div className="flex flex-col gap-2">
-          <label className="text-gray-700 font-semibold">آیدی بنر</label>
-          <input
-            name="banner_image_id"
-            value={settings.banner_image_id || ''}
-            onChange={handleChange}
-            placeholder={originalSettings.banner_image_id || 'مقدار وارد کنید'}
             className="border border-gray-300 rounded-lg p-3"
           />
         </div>
