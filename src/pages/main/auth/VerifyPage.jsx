@@ -17,7 +17,7 @@ function VerifyPage() {
   function handleSubmit(e) {
     e.preventDefault();
     axios
-      .post(`http://localhost:3000/auth/login`, {
+      .post(`${import.meta.env.VITE_API_URL}/auth/login`, {
         phone: phone,
         code,
       })
