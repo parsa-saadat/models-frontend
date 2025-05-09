@@ -50,29 +50,37 @@ function FooterComponent() {
         {/* بخش صفحات */}
         <div className="flex flex-col items-end">
           <p className="text-lg mb-3">صفحات</p>
-          <ul className="flex flex-col gap-2 text-gray-600 items-end">
-            <Link to="/">
-              <li>خانه</li>
-            </Link>
-            <Link to="/shop">
-              <li>فروشگاه</li>
-            </Link>
-            <Link to="/about">
-              <li>درباره ما</li>
-            </Link>
-            <Link to="/contact">
-              <li>تماس با ما</li>
-            </Link>
+          <ul className="flex flex-col gap-2 text-gray-600 items-end text-sm">
+            <li>
+              <Link to="/" className="hover:text-[--color-main] transition-colors duration-300">
+                خانه
+              </Link>
+            </li>
+            <li>
+              <Link to="/shop" className="hover:text-[--color-main] transition-colors duration-300">
+                فروشگاه
+              </Link>
+            </li>
+            <li>
+              <Link to="/about" className="hover:text-[--color-main] transition-colors duration-300">
+                درباره ما
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="hover:text-[--color-main] transition-colors duration-300">
+                تماس با ما
+              </Link>
+            </li>
           </ul>
         </div>
 
         {/* بخش لوگو و توضیحات */}
         <div className="flex flex-col items-end">
           <img src={settings?.logo} alt="Logo" className="mb-5 mr-[-14px] h-10 w-36 object-cover" />
-          <p className="w-full md:w-2/3 text-[var(--color-gray)] text-end">
-            فروشگاه {settings?.site_name || ""} با هدف ارائه‌ی مدل‌های کلکسیونی باکیفیت در مقیاس‌های مختلف مثل 1/64،
-            1/18 و... فعالیت می‌کند. ما عاشق جزئیات، اصالت و دنیای کلکسیون هستیم و تلاش می‌کنیم
-            تجربه‌ای خاص برای علاقه‌مندان فراهم کنیم.
+          <p dir='rtl' className="w-full md:w-2/3 text-[var(--color-gray)] text-start">
+            فروشگاه {settings?.site_name || ''} با هدف ارائه‌ی مدل‌های کلکسیونی باکیفیت در مقیاس‌های
+            مختلف مثل 1/64، 1/18 و... فعالیت می‌کند. ما عاشق جزئیات، اصالت و دنیای کلکسیون هستیم و
+            تلاش می‌کنیم تجربه‌ای خاص برای علاقه‌مندان فراهم کنیم.
           </p>
         </div>
       </div>
@@ -80,13 +88,14 @@ function FooterComponent() {
       {/* خط جداساز و کپی رایت */}
       <hr />
       <div className="py-5 text-sm text-center">
-        <p>
+        <p dir="rtl" className="text-sm text-gray-600 text-center">
           تمامی حقوق این وب‌سایت متعلق به {settings?.site_name} است. © {new Date().getFullYear()}
         </p>
+
         {/* deleloper */}
         <div className="flex justify-center items-center gap-1 pt-2 text-xs text-[--color-gray]">
           <span>developed by</span>
-          <a href="https://github.com/parsa-saadat" target="_blank" rel="noreferrer">
+          <a href="https://parsa-saadat.github.io/" target="_blank" rel="noreferrer">
             <span className="text-[--color-main] font-bold">{'< parsa ss />'}</span>
             <a />
           </a>

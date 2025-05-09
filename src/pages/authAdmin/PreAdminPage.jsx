@@ -39,10 +39,9 @@ function PreAdminPage() {
   return (
     <div className=" w-full max-w-sm mx-auto overflow-hidden bg-white rounded border mt-[75px]">
       <div className="px-6 pb-4">
-        <div className="flex justify-center mx-auto">
-          <img className="w-32 h-24 object-cover" src={settings?.logo} alt="" />
+        <div className="flex justify-center mx-auto mt-5 mb-2">
+          <img className="w-40 h-20 object-cover" src={settings?.logo} alt="" />
         </div>
-
         <h3 className="mt-1 text-xl font-medium text-center text-gray-600 ">خوش اومدی</h3>
 
         <p className="mt-1 text-center text-gray-500 ">ورود به پنل ادمین</p>

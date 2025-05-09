@@ -2,8 +2,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { contact_img } from '../../public/assets/images/images';
 import DashboardProductComponent from '../../components/dashboard/ProductComponent';
+import { Link } from 'react-router-dom';
 
 function ProductsPage() {
   const admin_token = localStorage.getItem('admin_token');
@@ -71,7 +71,7 @@ function ProductsPage() {
                 {/* search button */}
                 <div
                   onClick={() => setReload(reload + 1)}
-                  className="absolute right-0 h-full flex items-center justify-center p-3 bg-[--color-main] rounded-r text-white cursor-pointer"
+                  className="absolute right-0 h-full flex items-center justify-center p-3 bg-[--color-main] rounded-r text-white cursor-pointer hover:bg-[--color-black]"
                 >
                   <FontAwesomeIcon icon="search" />
                 </div>
@@ -84,6 +84,12 @@ function ProductsPage() {
             >
               {desc ? 'مرتب‌سازی : قدیمی‌ترین' : 'مرتب‌سازی : جدیدترین'}
             </button>
+            <Link
+              to={'/dashboard/products/create'}
+              className="py-2 px-[14px] cursor-pointer flex items-center justify-center text-sm font-medium tracking-wide text-white bg-[--color-main] rounded hover:bg-[--color-black]"
+            >
+              <FontAwesomeIcon icon="fa-solid fa-add" />
+            </Link>
           </div>
         </div>
       </div>

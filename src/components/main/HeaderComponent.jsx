@@ -16,13 +16,13 @@ const HeaderComponnet = () => {
           FERRARI 296 GTB
           </h1>
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/shop')}>
-            <p className="font-semibold text-sm md:text-base">رفتن به فروشگاه</p>
+            <p className="font-semibold text-sm md:text-base hover:text-[--color-main]">رفتن به فروشگاه</p>
             <p className="w-8 md:w-11 h-[2px] bg-[var(--color-gray)]"></p>
           </div>
         </div>
       </div>
 
-      <img className="w-full sm:w-1/2 object-cover" src={header_img} />
+      <img className="w-full sm:w-1/2 object-cover min-h-[560px]" src={header_img} />
     </div>
   );
 };

@@ -106,7 +106,7 @@ function SingleOrderPage() {
       <div
         className={` ${
           showAddress ? 'fixed' : 'hidden'
-        } top-0 right-0 w-screen h-screen bg-black/80 flex items-center justify-center`}
+        } top-0 right-0 w-screen h-screen bg-black/80 flex items-center justify-center upper`}
       >
         <div dir="rtl" className=" rounded p-6 text-sm flex flex-col bg-white  m-10 gap-6">
           <div className="flex justify-between">
@@ -138,7 +138,7 @@ function SingleOrderPage() {
             </div>
 
             <div>
-              <strong>آدرس:</strong> {order.shipping?.shipping_address?.full_address}
+              <strong>نشانی:</strong> {order.shipping?.shipping_address?.full_address}
             </div>
             <div>
               <strong>کد پستی:</strong> {order.shipping?.shipping_address?.postal_code}

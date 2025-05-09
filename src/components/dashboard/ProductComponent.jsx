@@ -20,7 +20,7 @@ function DashboardProductComponent({ product }) {
 
   return (
     <Link to={`/dashboard/products/${product._id}`}>
-      <div dir='ltr' className={`flex flex-col items-end rounded`} key={product._id}>
+      <div dir="ltr" className={`flex flex-col items-end rounded`} key={product._id}>
         <div className="relative aspect-square w-full overflow-hidden">
           <img className="absolute top-0 left-0 w-full h-full object-cover rounded" src={image} />
         </div>
@@ -35,7 +35,7 @@ function DashboardProductComponent({ product }) {
           </div>
           <div className="flex flex-col items-end w-2/3">
             <p className="pt-3 pb-1 text-sm">
-              {product.name} <span className="text-xs">x{product.quantity}</span>
+              <span className="text-xs">{product.quantity}x</span> {product.name}
             </p>
 
             {product.stock_status === 'COMING SOON' ? (

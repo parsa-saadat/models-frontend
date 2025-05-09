@@ -92,7 +92,7 @@ function AddressPage() {
       {loading ? (
         <div className="col-span-full text-center text-gray-500">در حال بارگذاری...</div>
       ) : address.length === 0 ? (
-        <div className="col-span-full text-center text-gray-500">هیچ آدرسی یافت نشد</div>
+        <div className="col-span-full text-center text-gray-500">هیچ نشانیی یافت نشد</div>
       ) : (
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -111,7 +111,7 @@ function AddressPage() {
                   {/* Full Address */}
                   <div className="text-gray-600 text-sm">
                     <div>
-                      <strong>آدرس کامل:</strong> {addr.full_address || '-'}
+                      <strong>نشانی کامل:</strong> {addr.full_address || '-'}
                     </div>
                     <div>
                       <strong>شهر:</strong> {addr.city || '-'}
@@ -136,7 +136,7 @@ function AddressPage() {
                   {/* Default Address Tag */}
                   {addr.is_default && (
                     <div className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded w-fit">
-                      آدرس پیش‌فرض
+                      نشانی پیش‌فرض
                     </div>
                   )}
 

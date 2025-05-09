@@ -164,73 +164,77 @@ function AdminOrders() {
         <div className="col-span-full text-center text-gray-500">در حال بارگذاری...</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {orders.map((order) => {
-            const statusColor =
-              {
-                processing: 'bg-yellow-100 text-yellow-700',
-                delivered: 'bg-green-100 text-green-700',
-                canceled: 'bg-red-100 text-red-700',
-              }[order.status] || 'bg-gray-100 text-gray-700';
+          {orders.length !== 0 ? (
+            orders.map((order) => {
+              const statusColor =
+                {
+                  processing: 'bg-yellow-100 text-yellow-700',
+                  delivered: 'bg-green-100 text-green-700',
+                  canceled: 'bg-red-100 text-red-700',
+                }[order.status] || 'bg-gray-100 text-gray-700';
 
-            const paymentColor =
-              order.payment.status === 'paid'
-                ? 'bg-green-100 text-green-700'
-                : 'bg-red-100 text-red-700';
+              const paymentColor =
+                order.payment.status === 'paid'
+                  ? 'bg-green-100 text-green-700'
+                  : 'bg-red-100 text-red-700';
 
-            return (
-              <div
-                key={order._id}
-                className="bg-white border border-gray-200 rounded p-5 transition cursor-pointer flex flex-col justify-between"
-                onClick={() => setSelectedOrder(order)}
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <span className={`text-xs font-bold px-3 py-1 rounded ${statusColor}`}>
-                    {orderStatusToFa(order.status)}
-                  </span>
-                  <span className="text-xs text-gray-500">
-                    {new Date(order.create_at).toLocaleDateString('fa-IR')}
-                  </span>
-                </div>
-
-                <div className="text-sm text-gray-800 space-y-1 mb-3">
-                  <div>
-                    <strong>گیرنده:</strong> {order.shipping?.shipping_address?.full_name || '-'}
-                  </div>
-                  <div>
-                    <strong>تعداد آیتم:</strong> {order.items?.length || 0}
-                  </div>
-                  <div className="flex items-center gap-1 flex-wrap">
-                    <strong>جمع کل:</strong>
-                    <span className="font-bold text-black">
-                      {(
-                        (order.payment.amount +
-                          order.shipping.shipping_cost -
-                          order.payment.discount_applied) /
-                        10
-                      ).toLocaleString()}
+              return (
+                <div
+                  key={order._id}
+                  className="bg-white border border-gray-200 rounded p-5 transition cursor-pointer flex flex-col justify-between"
+                  onClick={() => setSelectedOrder(order)}
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <span className={`text-xs font-bold px-3 py-1 rounded ${statusColor}`}>
+                      {orderStatusToFa(order.status)}
                     </span>
                     <span className="text-xs text-gray-500">
-                      <img src={toman_icon} className="w-5 h-5" alt="" />
+                      {new Date(order.create_at).toLocaleDateString('fa-IR')}
                     </span>
                   </div>
-                </div>
 
-                <div className="text-xs text-gray-600 space-y-1 border-t pt-3 mt-auto">
-                  <div>
-                    <strong>روش پرداخت:</strong> {order.payment.payment_gateway || '-'}
+                  <div className="text-sm text-gray-800 space-y-1 mb-3">
+                    <div>
+                      <strong>گیرنده:</strong> {order.shipping?.shipping_address?.full_name || '-'}
+                    </div>
+                    <div>
+                      <strong>تعداد آیتم:</strong> {order.items?.length || 0}
+                    </div>
+                    <div className="flex items-center gap-1 flex-wrap">
+                      <strong>جمع کل:</strong>
+                      <span className="font-bold text-black">
+                        {(
+                          (order.payment.amount +
+                            order.shipping.shipping_cost -
+                            order.payment.discount_applied) /
+                          10
+                        ).toLocaleString()}
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        <img src={toman_icon} className="w-5 h-5" alt="" />
+                      </span>
+                    </div>
                   </div>
-                  <div>
-                    <strong>وضعیت پرداخت:</strong>
-                    <span
-                      className={`inline-block ml-1 px-2 py-0.5 rounded text-xs ${paymentColor}`}
-                    >
-                      {order.payment.status === 'paid' ? 'پرداخت شده' : 'پرداخت نشده'}
-                    </span>
+
+                  <div className="text-xs text-gray-600 space-y-1 border-t pt-3 mt-auto">
+                    <div>
+                      <strong>روش پرداخت:</strong> {order.payment.payment_gateway || '-'}
+                    </div>
+                    <div>
+                      <strong>وضعیت پرداخت:</strong>
+                      <span
+                        className={`inline-block ml-1 px-2 py-0.5 rounded text-xs ${paymentColor}`}
+                      >
+                        {order.payment.status === 'paid' ? 'پرداخت شده' : 'پرداخت نشده'}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <div className="col-span-full text-center text-gray-500">هیچ سفارشی ای یافت نشد</div>
+          )}
         </div>
       )}
 
@@ -298,7 +302,7 @@ function AdminOrders() {
               <div className="space-y-6 text-right text-sm">
                 {/* اطلاعات گیرنده و وضعیت سفارش */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className=" rounded p-4  border text-sm flex flex-col gap-1">
+                  <div dir="rtl" className=" rounded p-4  border text-sm flex flex-col gap-1">
                     <div>
                       <strong>گیرنده:</strong> {selectedOrder.shipping?.shipping_address?.full_name}
                     </div>
@@ -321,7 +325,7 @@ function AdminOrders() {
                     </div>
 
                     <div>
-                      <strong>آدرس:</strong>{' '}
+                      <strong>نشانی:</strong>{' '}
                       {selectedOrder.shipping?.shipping_address?.full_address}
                     </div>
                     <div>

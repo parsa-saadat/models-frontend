@@ -48,9 +48,9 @@ function SettingPage() {
           <label className="text-gray-700 font-semibold">نام سایت</label>
           <input
             name="site_name"
-            value={settings.site_name || ''}
+            value={settings?.site_name || ''}
             onChange={handleChange}
-            placeholder={originalSettings.site_name || 'مقدار وارد کنید'}
+            placeholder={originalSettings?.site_name || 'مقدار وارد کنید'}
             className="border border-gray-300 rounded-lg p-3"
           />
         </div>
@@ -60,9 +60,9 @@ function SettingPage() {
           <label className="text-gray-700 font-semibold">آیدی لوگو</label>
           <input
             name="logo_image_id"
-            value={settings.logo_image_id || ''}
+            value={settings?.logo_image_id || ''}
             onChange={handleChange}
-            placeholder={originalSettings.logo_image_id || 'مقدار وارد کنید'}
+            placeholder={originalSettings?.logo_image_id || 'مقدار وارد کنید'}
             className="border border-gray-300 rounded-lg p-3"
           />
         </div>
@@ -72,9 +72,9 @@ function SettingPage() {
           <label className="text-gray-700 font-semibold">آیدی فاوآیکون</label>
           <input
             name="favicon_image_id"
-            value={settings.favicon_image_id || ''}
+            value={settings?.favicon_image_id || ''}
             onChange={handleChange}
-            placeholder={originalSettings.favicon_image_id || 'مقدار وارد کنید'}
+            placeholder={originalSettings?.favicon_image_id || 'مقدار وارد کنید'}
             className="border border-gray-300 rounded-lg p-3"
           />
         </div>
@@ -84,9 +84,9 @@ function SettingPage() {
           <label className="text-gray-700 font-semibold">ایمیل تماس</label>
           <input
             name="contact_email"
-            value={settings.contact_email || ''}
+            value={settings?.contact_email || ''}
             onChange={handleChange}
-            placeholder={originalSettings.contact_email || 'مقدار وارد کنید'}
+            placeholder={originalSettings?.contact_email || 'مقدار وارد کنید'}
             className="border border-gray-300 rounded-lg p-3"
           />
         </div>
@@ -96,9 +96,9 @@ function SettingPage() {
           <label className="text-gray-700 font-semibold">تلفن تماس</label>
           <input
             name="contact_phone"
-            value={settings.contact_phone || ''}
+            value={settings?.contact_phone || ''}
             onChange={handleChange}
-            placeholder={originalSettings.contact_phone || 'مقدار وارد کنید'}
+            placeholder={originalSettings?.contact_phone || 'مقدار وارد کنید'}
             className="border border-gray-300 rounded-lg p-3"
           />
         </div>
@@ -119,7 +119,7 @@ function SettingPage() {
                 onClick={() => document.getElementById('theme_color').click()}
                 className="w-10 h-10 rounded border border-[--color-gray] cursor-pointer transition-all duration-200  px-4 ml-2"
                 style={{
-                  backgroundColor: settings.theme_color || '#191919',
+                  backgroundColor: settings?.theme_color || '#191919',
                 }}
               ></div>
 
@@ -128,9 +128,9 @@ function SettingPage() {
                 type="color"
                 name="theme_color"
                 id='theme_color'
-                value={settings.theme_color || ''}
+                value={settings?.theme_color || ''}
                 onChange={handleChange}
-                placeholder={originalSettings.theme_color || 'مقدار وارد کنید'}
+                placeholder={originalSettings?.theme_color || 'مقدار وارد کنید'}
                 className="absolute w-0 h-0 opacity-0"
                 />
 
@@ -139,9 +139,9 @@ function SettingPage() {
                 type="text"
                 className="border border-gray-300 rounded-lg p-3 w-full"
                 name="theme_color"
-                value={settings.theme_color || ''}
+                value={settings?.theme_color || ''}
                 onChange={handleChange}
-                placeholder={originalSettings.theme_color || 'مقدار وارد کنید'}
+                placeholder={originalSettings?.theme_color || 'مقدار وارد کنید'}
               />
             </div>
           </div>
@@ -152,9 +152,9 @@ function SettingPage() {
           <label className="text-gray-700 font-semibold">کانال تلگرام</label>
           <input
             name="telegram_chanel"
-            value={settings.telegram_chanel || ''}
+            value={settings?.telegram_chanel || ''}
             onChange={handleChange}
-            placeholder={originalSettings.telegram_chanel || 'مقدار وارد کنید'}
+            placeholder={originalSettings?.telegram_chanel || 'مقدار وارد کنید'}
             className="border border-gray-300 rounded-lg p-3"
           />
         </div>
@@ -164,9 +164,9 @@ function SettingPage() {
           <label className="text-gray-700 font-semibold">پشتیبانی تلگرام</label>
           <input
             name="telegram_support"
-            value={settings.telegram_support || ''}
+            value={settings?.telegram_support || ''}
             onChange={handleChange}
-            placeholder={originalSettings.telegram_support || 'مقدار وارد کنید'}
+            placeholder={originalSettings?.telegram_support || 'مقدار وارد کنید'}
             className="border border-gray-300 rounded-lg p-3"
           />
         </div>
@@ -176,9 +176,9 @@ function SettingPage() {
           <label className="text-gray-700 font-semibold">صفحه اینستاگرام</label>
           <input
             name="instagram_page"
-            value={settings.instagram_page || ''}
+            value={settings?.instagram_page || ''}
             onChange={handleChange}
-            placeholder={originalSettings.instagram_page || 'مقدار وارد کنید'}
+            placeholder={originalSettings?.instagram_page || 'مقدار وارد کنید'}
             className="border border-gray-300 rounded-lg p-3"
           />
         </div>

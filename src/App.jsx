@@ -37,6 +37,7 @@ import AuthLayout from './components/layouts/AuthAdminLayout';
 // Context
 import { SettingsProvider } from './contexts/SettingsContext';
 import EditProductPage from './pages/dashboard/EditProductPage';
+import CreateProductPage from './pages/dashboard/CreateProductPage';
 
 const App = () => {
   return (
@@ -89,6 +90,7 @@ const MainApp = () => {
           <Route path="orders" element={<AdminOrders />} />
           <Route path="products" element={<ProductsPage />} />
           <Route path="products/:productId" element={<EditProductPage />} />
+          <Route path="products/create" element={<CreateProductPage />} />
           <Route path="logs" element={<LogsPage />} />
           <Route path="address" element={<AdminAddressPage />} />
           <Route path="medias" element={<MediaPage />} />

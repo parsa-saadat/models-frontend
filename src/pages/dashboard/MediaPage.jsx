@@ -149,10 +149,10 @@ function MediaPage() {
       </div>
 
       {/* Media Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 mt-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
         {loading ? (
           <div className="col-span-full text-center text-gray-500">در حال بارگذاری...</div>
-        ) : (
+        ) : medias.length !== 0 ? (
           medias.map((media) => (
             <div
               key={media._id}
@@ -203,6 +203,8 @@ function MediaPage() {
               </div>
             </div>
           ))
+        ) : (
+          <div className="col-span-full text-center text-gray-500">هیچ رسانه ای یافت نشد</div>
         )}
       </div>
 

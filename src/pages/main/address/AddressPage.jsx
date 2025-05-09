@@ -44,7 +44,7 @@ function AddressPage() {
       })
       .then(() => {
         setAddress(address.filter((a) => a._id !== addressId));
-        toast.success('آدرس با موفقیت حذف شد');
+        toast.success('نشانی با موفقیت حذف شد');
       })
       .catch((e) => {
         toast.error(e.response.data.message);
@@ -74,7 +74,7 @@ function AddressPage() {
       )
       .then((res) => {
         setAddress([...address, res.data.body]);
-        toast.success('آدرس با موفقیت ایجاد شد');
+        toast.success('نشانی با موفقیت ایجاد شد');
       })
       .catch((e) => {
         toast.error(e.response.data.message);
@@ -110,7 +110,7 @@ function AddressPage() {
                   استان
                 </th>
                 <th scope="col" className="px-4 py-3 rounded">
-                  ادرس کامل
+                  نشانی کامل
                 </th>
               </tr>
             </thead>
@@ -161,7 +161,7 @@ function AddressPage() {
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full xl:w-1/2 px-3 mb-6 xl:mb-0">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                آدرس کامل
+                نشانی کامل
               </label>
               <input
                 className="text-end appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -271,7 +271,7 @@ function AddressPage() {
           </div>
           <div className="flex w-full text-end justify-end items-center">
             <label className="block uppercase tracking-wide text-gray-700 text-xs mx-2 font-bold">
-              ادرس اصلی
+              نشانی پیش فرض
             </label>
             <input
               id="grid-is-default"

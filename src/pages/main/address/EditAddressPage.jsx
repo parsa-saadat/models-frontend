@@ -70,7 +70,7 @@ function EditAddressPage() {
         { headers: { Authorization: token } },
       )
       .then((r) => {
-        toast.success('آدرس با موفقیت ویرایش شد');
+        toast.success('نشانی با موفقیت ویرایش شد');
         navigate('/address');
       })
       .catch((e) => {
@@ -87,7 +87,7 @@ function EditAddressPage() {
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full xl:w-1/2 px-3 mb-6 xl:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              آدرس کامل
+              نشانی کامل
             </label>
             <input
               className="text-end appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -197,7 +197,7 @@ function EditAddressPage() {
         </div>
         <div className="flex w-full text-end justify-end items-center">
           <label className="block uppercase tracking-wide text-gray-700 text-xs mx-2 font-bold">
-            ادرس اصلی
+            اصلی
           </label>
           <input
             id="grid-is-default"

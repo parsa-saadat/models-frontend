@@ -64,30 +64,34 @@ function NavbarComponent() {
         <Link to="/">
           <img src={settings?.logo} className="h-10 w-36 object-cover" />
         </Link>
-        <ul className="hidden sm:flex gap-5 text-[16px] text-gray-700">
-          <NavLink to="/contact" className="flex flex-col items-center gap-1">
-            <p className="uppercase">تماس با ما</p>
-            <hr className="hidden w-2/4 border-none h-[1.5px] bg-gray-700" />
-          </NavLink>
-          <NavLink to="/about" className="flex flex-col items-center gap-1">
-            <p className="uppercase">درباره ما</p>
-            <hr className="hidden w-2/4 border-none h-[1.5px] bg-gray-700" />
-          </NavLink>
-          <NavLink to="/shop" className="flex flex-col items-center gap-1">
-            <p className="uppercase">فروشگاه</p>
-            <hr className="hidden w-2/4 border-none h-[1.5px] bg-gray-700" />
-          </NavLink>
-          <NavLink to="/" className="flex flex-col items-center gap-1">
-            <p className="uppercase">خانه</p>
-            <hr className="hidden w-2/4 border-none h-[1.5px] bg-gray-700" />
-          </NavLink>
+        <ul dir="rtl" className="hidden sm:flex gap-8 text-[16px] text-gray-700">
+          {[
+            { to: '/', label: 'خانه' },
+            { to: '/shop', label: 'فروشگاه' },
+            { to: '/about', label: 'درباره ما' },
+            { to: '/contact', label: 'تماس با ما' },
+          ].map(({ to, label }) => (
+            <NavLink
+              key={to}
+              to={to}
+              className={({ isActive }) =>
+                `flex flex-col items-center gap-1 relative group transition-all duration-300 ${
+                  isActive ? 'text-[--color-main]' : ''
+                }`
+              }
+            >
+              <p className="uppercase hover:text-[--color-main]">{label}</p>
+              {/* Underline animation */}
+              <span className="absolute -bottom-1 w-0 h-[2px] bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+            </NavLink>
+          ))}
         </ul>
 
         <div className="flex items-center  gap-6">
           <img
             src={search_icon}
             alt="search"
-            className="w-5 cursor-poiter"
+            className="w-5 cursor-pointer"
             onClick={() => setVisibleSearch(!visibleSearch)}
           />
 
@@ -106,7 +110,7 @@ function NavbarComponent() {
                       <p className="cursor-pointer hover:text-[--color-black]">سفارش ها</p>
                     </Link>
                     <Link to="/address">
-                      <p className="cursor-pointer hover:text-[--color-black]">آدرس ها</p>
+                      <p className="cursor-pointer hover:text-[--color-black]">نشانی ها</p>
                     </Link>
                     <Link to="/">
                       <p

@@ -3,6 +3,7 @@ import React from 'react';
 import Title from './TitleComponent';
 
 import { express_icon, quality_icon, support_icon } from '../../public/assets/icons/icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function OurPolicyComponent() {
   return (
@@ -15,21 +16,27 @@ function OurPolicyComponent() {
           </p>
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row justify-around gap-13 sm:gap-2 text-center gap-20 text-xs sm:text-sm md:text-base text-[var(--color-gray)] ">
+      <div
+        className="flex flex-col sm:flex-row justify-around gap-20 sm:gap-5 text-center text-xs sm:text-sm md:text-base text-[var(--color-gray)]"
+        dir="rtl"
+      >
         <div>
-          <img src={express_icon} className="w-12 m-auto mb-5" alt="" />
+          <FontAwesomeIcon icon="truck-fast" className="text-4xl text-[var(--color-main)] mb-5" />
           <p className="font-semibold mb-2 text-[var(--color-main)]">تحویل سریع</p>
-          <p className="text-[var(--color-gray)]">تحویل سریع و آسان با پست و تیپاکس</p>
+          <p>تحویل سریع و آسان با پست و تیپاکس</p>
         </div>
         <div>
-          <img src={quality_icon} className="w-12 m-auto mb-5" alt="" />
-          <p className="font-semibold mb-2 text-[var(--color-main)]">تصمین کیفت</p>
-          <p className="text-[var(--color-gray)]">تضمین کیفیت و اصالت کالا</p>
+          <FontAwesomeIcon
+            icon="shield-heart"
+            className="text-4xl text-[var(--color-main)] mb-5"
+          />
+          <p className="font-semibold mb-2 text-[var(--color-main)]">تضمین کیفیت</p>
+          <p>تضمین کیفیت و اصالت کالا</p>
         </div>
         <div>
-          <img src={support_icon} className="w-12 m-auto mb-5" alt="" />
-          <p className="font-semibold mb-2 text-[var(--color-main)]">پشتبیبانی فعال</p>
-          <p className="text-[var(--color-gray)]">تیم ما همیشه آماده پاسخ به شماست</p>
+          <FontAwesomeIcon icon="headset" className="text-4xl text-[var(--color-main)] mb-5" />
+          <p className="font-semibold mb-2 text-[var(--color-main)]">پشتیبانی فعال</p>
+          <p>تیم ما همیشه آماده پاسخ به شماست</p>
         </div>
       </div>
     </div>

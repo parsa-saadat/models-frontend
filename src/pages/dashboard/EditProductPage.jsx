@@ -154,7 +154,7 @@ function EditProductPage() {
   return (
     <div dir="rtl" className="flex flex-col justify-between items-center">
       {/* navigator */}
-      <div className="flex justify-between lg:justify-start lg:gap-3 items-center w-full pb-10 pt-3">
+      <div className="flex justify-between lg:justify-start lg:gap-3 items-center w-full pb-10 pt-3 px-4 ">
         <h2 className=" text-xl font-bold text-[--color-black]">بروزرسانی محصول</h2>
         <span
           onClick={() => navigate(-1)}
@@ -167,7 +167,7 @@ function EditProductPage() {
           />
         </span>
       </div>
-      <div className="flex flex-col lg:flex-row gap-12 px-4 w-full">
+      <div className="flex flex-col lg:flex-row gap-12 w-full">
         {/* update form */}
         <div className="flex justify-between items-center w-full lg:w-1/2">
           <div className="w-full">
@@ -211,7 +211,7 @@ function EditProductPage() {
                       />
                     </div>
                     {/* col 2 */}
-                    <div className='relative'>
+                    <div className="relative">
                       <label
                         htmlFor="category"
                         className="block mb-2 text-md font-medium text-[--color-black]"

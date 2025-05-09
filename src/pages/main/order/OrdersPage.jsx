@@ -151,7 +151,7 @@ function OrdersPage() {
                     );
                   })}
                 </div>
-                <div className="w-full px-2 py-3">
+                <div className="w-full px-2 py-3 ">
                   <div className="text-xs pb-2">{orderStatusToFa(order.status)}</div>
                   {order.payment.status == 'paid' ? (
                     <div className="text-[--color-success] font-bold text-xs">پرداخت شده</div>
@@ -166,23 +166,23 @@ function OrdersPage() {
                     <span>: تاریخ</span>
                   </div>
                 </div>
-                <div className="flex flex-col items-center justify-center  gap-2 w-full sm:w-52">
+                <div className="flex flex-col items-center justify-center  gap-2 w-full sm:w-52 ">
                   {order.payment.status !== 'paid' ? (
                     <button
                       onClick={() => pay(order._id)}
-                      className="w-full  bg-[--color-black] text-white font-semibold text-xs px-5 py-3 md:py-3 md:px-6 md:text-xs transition-all hover:bg-[var(--color-success)] rounded"
+                      className="w-full  bg-[--color-black] text-white font-semibold text-xs px-5 py-3 md:py-3 md:px-6 md:text-xs transition-all duration-300 hover:bg-[var(--color-success)] rounded"
                     >
                       پرداخت
                     </button>
                   ) : (
                     <button
                       disabled
-                      className="w-full bg-[--color-success] text-white font-semibold text-xs px-2 py-3 md:py-3 md:px-6 md:text-xs transition-all hover:bg-[var(--color-gray)] rounded"
+                      className="w-full bg-[--color-success] text-white font-semibold text-xs px-2 py-3 md:py-3 md:px-6 md:text-xs transition-all duration-300 hover:bg-[var(--color-gray)] rounded"
                     >
                       پرداخت شده
                     </button>
                   )}
-                  <button className="w-full  border text-[--color-black] font-semibold text-xs px-5 py-3 md:py-3 md:px-6 md:text-xs transition-all hover:bg-[var(--color-main)] hover:text-white rounded">
+                  <button className="w-full  border text-[--color-black] font-semibold text-xs px-5 py-3 md:py-3 md:px-6 md:text-xs transition-all duration-300 hover:bg-[var(--color-main)] hover:text-white rounded">
                     جزئیات
                   </button>
                 </div>
