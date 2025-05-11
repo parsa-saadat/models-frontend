@@ -39,6 +39,7 @@ import { SettingsProvider } from './contexts/SettingsContext';
 import EditProductPage from './pages/dashboard/EditProductPage';
 import CreateProductPage from './pages/dashboard/CreateProductPage';
 import NotFoundPage from './pages/NotFoundPage';
+import ScrollToTopComponent from './components/ScroolToTopComponent';
 
 const App = () => {
   return (
@@ -64,6 +65,7 @@ const MainApp = () => {
         theme="light"
         transition={Bounce}
       />
+      <ScrollToTopComponent />
       <Routes>
         {/* Main Layout Routes */}
         <Route element={<MainLayout />}>

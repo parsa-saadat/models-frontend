@@ -47,7 +47,7 @@ function ProductPage() {
       const basePrice = data.price / 10;
       const discount = data.discount?.percentage;
 
-      setPrice(price.toLocaleString());
+      setPrice(data.price.toLocaleString());
       if (discount) {
         const discounted = Math.floor(basePrice * (1 - discount / 100));
         setDiscountPrice(discounted.toLocaleString());
@@ -151,9 +151,9 @@ function ProductPage() {
       <div className="flex gap-12 pt-10 sm:flex-row flex-col-reverse">
         {/* Product Details */}
         <div className="flex-1 flex flex-col items-end">
-          <div className="flex mt-2 flex-row-reverse items-center">
+          <div className="flex mt-2 flex-row-reverse items-center text-end">
             <span style={{ background: product.color }} className="rounded w-6 h-6 ml-3 mb-2" />
-            <h1 className="text-2xl font-medium">{product.name}</h1>
+            <h1 className="text-lg md:text-lg lg:text-2xl font-medium">{product.name}</h1>
             <span className="mx-3 text-xs">
               {product.category} - {product.size}
             </span>
