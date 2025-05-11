@@ -22,7 +22,7 @@ const HeaderComponnet = () => {
         </div>
       </div>
 
-      <img className="w-full sm:w-1/2 object-cover min-h-[560px]" src={header_img} />
+      <img className="w-full sm:w-1/2 object-cover min-h-[140px] xl:min-h-[560px]" src={header_img} />
     </div>
   );
 };

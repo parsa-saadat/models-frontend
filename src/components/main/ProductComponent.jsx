@@ -34,7 +34,7 @@ function Product({ product }) {
             </p>
           </div>
           <div className="flex flex-col items-end w-2/3">
-            <p className="pt-3 pb-1 text-sm">{product.name}</p>
+            <p className="pt-3 pb-1 text-sm text-end ">{product.name}</p>
             {product.stock_status === 'COMING SOON' ? (
               <span className="text-[var(--color-warning)] pl-1 text-xs font-bold">... بزودی </span>
             ) : product.stock_status === 'IN STOCK' ? (

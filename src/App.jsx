@@ -38,6 +38,7 @@ import AuthLayout from './components/layouts/AuthAdminLayout';
 import { SettingsProvider } from './contexts/SettingsContext';
 import EditProductPage from './pages/dashboard/EditProductPage';
 import CreateProductPage from './pages/dashboard/CreateProductPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 const App = () => {
   return (
@@ -81,7 +82,6 @@ const MainApp = () => {
           <Route path="/order" element={<OrdersPage />} />
           <Route path="/order/:orderId" element={<SingleOrderPage />} />
         </Route>
-
         {/* Admin Dashboard Routes */}
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<CounterPage />} />
@@ -95,12 +95,13 @@ const MainApp = () => {
           <Route path="address" element={<AdminAddressPage />} />
           <Route path="medias" element={<MediaPage />} />
         </Route>
-
         {/* Admin Auth Routes */}
         <Route element={<AuthLayout />}>
           <Route path="/dashboard/pre" element={<PreAdminPage />} />
           <Route path="/dashboard/verify" element={<VerifyAdminPage />} />
         </Route>
+
+        <Route path="*" element={<NotFoundPage />} /> {/* 404 Page */}
       </Routes>
     </>
   );

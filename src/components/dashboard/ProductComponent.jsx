@@ -34,7 +34,7 @@ function DashboardProductComponent({ product }) {
             </p>
           </div>
           <div className="flex flex-col items-end w-2/3">
-            <p className="pt-3 pb-1 text-sm">
+            <p className="pt-3 pb-1 text-sm text-end">
               <span className="text-xs">{product.quantity}x</span> {product.name}
             </p>
 

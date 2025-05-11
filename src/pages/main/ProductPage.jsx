@@ -40,15 +40,14 @@ function ProductPage() {
   const fetchProduct = async () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/product/${productId}`);
-      const data = res.data.body;
+      let data = res.data.body;
 
       data.create_at = new Date(data.create_at).toLocaleDateString('fa-IR');
-      data.description = markdown(data.description);
 
       const basePrice = data.price / 10;
       const discount = data.discount?.percentage;
 
-      setPrice(basePrice.toLocaleString());
+      setPrice(price.toLocaleString());
       if (discount) {
         const discounted = Math.floor(basePrice * (1 - discount / 100));
         setDiscountPrice(discounted.toLocaleString());
@@ -59,6 +58,7 @@ function ProductPage() {
       setProduct(data);
       loadImages(data.images || []);
     } catch (err) {
+      console.log(err);
       toast.error('خطا در دریافت اطلاعات محصول');
     }
   };
