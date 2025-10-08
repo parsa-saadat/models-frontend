@@ -4,6 +4,9 @@
 
 Online Store for Miniature Models with Advanced Admin Panel
 
+- Frontend : https://github.com/parsa-saadat/models-frontend/
+- Backend : https://github.com/parsa-saadat/models-backend/
+
 ## 🛠 Technologies
 
 **Frontend:** 
